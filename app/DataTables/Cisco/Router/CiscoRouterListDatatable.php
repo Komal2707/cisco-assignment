@@ -29,7 +29,7 @@ class CiscoRouterListDatatable extends DataTable
 
     public function query( \App\Router $router )
     {
-        return $router->get();
+        return ($router->select($this->getFields())->orderBy('id', 'desc'));
     }
 
 
@@ -38,12 +38,12 @@ class CiscoRouterListDatatable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax(route('cisco::router::list'))
-            // ->ajax([
-            //     'url' => route('cisco::router::list'),
+            ->ajax([
+                'url' => route('cisco::router::list'),
             //     'data' => 'function(d){
             //             d.release_id=$("#release_id").val();d.date_from=$("#date_from").val();d.date_to=$("#date_to").val();
             //         }'
-            // ])
+            ])
             ->addAction(['width' => '80px'])
             ->parameters($this->getBuilderParameters());
     }
@@ -63,6 +63,19 @@ class CiscoRouterListDatatable extends DataTable
             ['data' => 'loopback', 'name' => 'loopback', 'title' => 'Loopback'],
             ['data' => 'mac_address', 'name' => 'mac_address', 'title' => 'MAC Address'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
+        ];
+    }
+
+    protected function getFields()
+    {
+        return [
+            'id' ,
+            'sap_id' ,
+            'type' ,
+            'hostname' ,
+            'loopback' ,
+            'mac_address' ,
+            'created_at'
         ];
     }
 }

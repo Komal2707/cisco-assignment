@@ -17,4 +17,9 @@ class Router extends Model
         'loopback',
         'mac_address'
     ];
+
+    public static function getRecords()
+    {
+        return self::all();
+    }
 }

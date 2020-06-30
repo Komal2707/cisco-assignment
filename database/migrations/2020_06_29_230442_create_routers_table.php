@@ -19,7 +19,7 @@ class CreateRoutersTable extends Migration
             $table->string('type')->nullable();
             $table->string('hostname')->nullable();
             $table->string('loopback')->nullable();
-            $table->string('mac_address')->unique();
+            $table->string('mac_address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -20,7 +20,7 @@ Route::group(['as' => 'cisco::', 'prefix' => 'cisco', 'namespace' => 'Cisco'], f
 
     Route::group(['as' => 'router::', 'prefix' => 'router', 'namespace' => 'Router'], function () {
 
-        Route::get('/', [ 'as' => 'list', 'uses' => 'CiscoRouterController@dataTable']);
+        Route::get('list', [ 'as' => 'list', 'uses' => 'CiscoRouterController@dataTable']);
 
         Route::get('create', [ 'as' => 'create', 'uses' => 'CiscoRouterController@create']);
         Route::get('edit/{router}', [ 'as' => 'edit', 'uses' => 'CiscoRouterController@edit']);
