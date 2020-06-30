@@ -14,3 +14,24 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['as' => 'cisco::', 'prefix' => 'cisco', 'namespace' => 'Cisco'], function () {
+
+    Route::group(['as' => 'router::', 'prefix' => 'router', 'namespace' => 'Router'], function () {
+
+        Route::get('/', [ 'as' => 'list', 'uses' => 'CiscoRouterController@dataTable']);
+
+        Route::get('create', [ 'as' => 'create', 'uses' => 'CiscoRouterController@create']);
+        Route::get('edit/{router}', [ 'as' => 'edit', 'uses' => 'CiscoRouterController@edit']);
+        Route::get('delete/{router}', [ 'as' => 'delete', 'uses' => 'CiscoRouterController@delete']);
+        
+        Route::post('store', ['middleware' => ['permission:' . ''], 'as' => 'store', 'uses' => 'CiscoRouterController@store']);
+    });
+    
+    Route::group(['as' => 'geometric::', 'prefix' => 'geometric', 'namespace' => 'Geometric'], function () {
+        Route::get('/', [ 'as' => 'show', 'uses' => 'CiscoGeometricController@show']);
+
+    });
+
+});
