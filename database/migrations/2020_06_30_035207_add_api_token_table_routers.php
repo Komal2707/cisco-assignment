@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRouterViewsTable extends Migration
+class AddApiTokenTableRouters extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class CreateRouterViewsTable extends Migration
      */
     public function up()
     {
-        Artisan::call('router:create-view');
+        Schema::table('routers', function ($table) {
+            $table->string('api_token', 80)
+                                ->unique()
+                                ->nullable()
+                                ->default(null);
+        });
     }
 
     /**
@@ -23,7 +28,6 @@ class CreateRouterViewsTable extends Migration
      */
     public function down()
     {
-        DB::statement("DROP VIEW router_view");
-        // Artisan::call('router:drop-view');
+        //
     }
 }
