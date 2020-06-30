@@ -5,6 +5,7 @@ namespace App\DataTables\Cisco\Router;
 use App\Router;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\QueryDataTable;
 
 class CiscoRouterListDatatable extends DataTable
 {
@@ -29,7 +30,8 @@ class CiscoRouterListDatatable extends DataTable
 
     public function query( \App\Router $router )
     {
-        return ($router->select($this->getFields())->orderBy('id', 'desc'));
+        // return ($router->select($this->getFields())->orderBy('id', 'desc'));
+        return (new QueryDataTable(\DB::table('routers')))->toJson();
     }
 
 
@@ -38,12 +40,12 @@ class CiscoRouterListDatatable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax(route('cisco::router::list'))
-            ->ajax([
-                'url' => route('cisco::router::list'),
+            // ->ajax([
+                // 'url' => route('cisco::router::list'),
             //     'data' => 'function(d){
             //             d.release_id=$("#release_id").val();d.date_from=$("#date_from").val();d.date_to=$("#date_to").val();
             //         }'
-            ])
+            // ])
             ->addAction(['width' => '80px'])
             ->parameters($this->getBuilderParameters());
     }
