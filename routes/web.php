@@ -35,3 +35,6 @@ Route::group(['as' => 'cisco::', 'prefix' => 'cisco', 'namespace' => 'Cisco'], f
     });
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
