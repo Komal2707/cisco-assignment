@@ -90,9 +90,9 @@ class CiscoRouterController extends Controller
        $validator = Validator::make($request->all(), [
  
             'sap_id'    => 'required', 
-            'hostname'  => 'required|unique:posts',
+            'hostname'  => 'required|unique:routers',
             'type'      => 'required',
-            'loopback'  => 'required|unique:posts',
+            'loopback'  => 'required|unique:routers',
             'mac_address' => 'required',
 
         ]);

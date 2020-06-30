@@ -8,7 +8,6 @@ $factory->define(App\Router::class, function (Faker $faker) {
         'hostname'        => $faker->url,
         'type'            => $faker->randomElement(['AGI', 'CSS']),
         'loopback'        => $faker->ipv4,
-        'mac_address'     => $faker->macAddress,
-        'api_token'       => str_random(60),
+        'mac_address'     => $faker->macAddress
     ];
 });

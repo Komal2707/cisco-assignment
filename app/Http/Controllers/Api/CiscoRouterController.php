@@ -27,13 +27,13 @@ class CiscoRouterController extends Controller
        $validator = Validator::make($request->all(), [
  
             'sap_id'    => 'required', 
-            'hostname'  => 'required|unique:posts',
+            'hostname'  => 'required|unique:routers',
             'type'      => 'required',
-            'loopback'  => 'required|unique:posts',
+            'loopback'  => 'required|unique:routers',
             'mac_address' => 'required',
  
        ]);
-//   return ($request->all());
+
        if ($validator->fails()) {
  
            return response()->json(['error'=>$validator->errors()], 401);            
@@ -41,14 +41,13 @@ class CiscoRouterController extends Controller
        }
  
        $data    = $request->all();
-       $data['api_token'] = str_random(60);
        $router  = Router::create($data);
 
-       $success['token']    =  $router->createToken('MyApp')->accessToken;
-       $success['hostname'] =  $router->hostname;
-       $success['loopback'] =  $router->loopback;
+    //    $success['token']    =  $router->createToken('MyApp')->accessToken;
+    //    $success['hostname'] =  $router->hostname;
+    //    $success['loopback'] =  $router->loopback;
  
-       return response()->json(['success'=>$success], $this->successStatus);
+       return response()->json(['success'=>$router], $this->successStatus);
  
    }
 
@@ -64,9 +63,9 @@ class CiscoRouterController extends Controller
         $validator = Validator::make($request->all(), [
   
              'sap_id'    => 'required', 
-             'hostname'  => 'required|unique:posts',
+             'hostname'  => 'required|unique:routers',
              'type'      => 'required',
-             'loopback'  => 'required|unique:posts',
+             'loopback'  => 'required|unique:routers',
              'mac_address' => 'required',
   
         ]);
