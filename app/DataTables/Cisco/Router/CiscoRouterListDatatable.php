@@ -28,7 +28,7 @@ class CiscoRouterListDatatable extends DataTable
     }
 
 
-    public function query( \App\Router $router )
+    public function query( \App\RouterView $router )
     {
         // return ($router->select($this->getFields())->orderBy('id', 'desc'));
         return (new QueryDataTable(\DB::table('routers')))->toJson();
