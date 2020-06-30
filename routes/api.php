@@ -19,11 +19,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('login', 'Api\PassportController@login');
- 
 Route::post('register', 'Api\PassportController@register');
- 
 Route::group(['middleware' => 'auth:api'], function(){
- 
-Route::post('get-details', 'Api\PassportController@getDetails');
- 
+    Route::post('get-details', 'Api\PassportController@getDetails');
+});
+
+Route::group(['as' => 'router::', 'prefix' => 'router'], function () {
+
+    Route::post('create', 'Api\CiscoRouterController@create');
+    Route::post('update', 'Api\CiscoRouterController@update');
+    Route::post('delete', 'Api\CiscoRouterController@delete');
+
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::post('get-details', 'Api\CiscoRouterController@getDetails');
+    });
+
 });
