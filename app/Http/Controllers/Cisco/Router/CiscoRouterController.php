@@ -86,6 +86,24 @@ class CiscoRouterController extends Controller
     {
         $router = request('router');
 
+
+       $validator = Validator::make($request->all(), [
+ 
+            'sap_id'    => 'required', 
+            'hostname'  => 'required|unique:posts',
+            'type'      => 'required',
+            'loopback'  => 'required|unique:posts',
+            'mac_address' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json(['error'=>$validator->errors()], 401);            
+
+        }
+
+
         $data = [
             'sap_id' => $router['sap_id'],
             'hostname' => $router['hostname'],

@@ -27,9 +27,9 @@ class CiscoRouterController extends Controller
        $validator = Validator::make($request->all(), [
  
             'sap_id'    => 'required', 
-            'hostname'  => 'required',
+            'hostname'  => 'required|unique:posts',
             'type'      => 'required',
-            'loopback'  => 'required',
+            'loopback'  => 'required|unique:posts',
             'mac_address' => 'required',
  
        ]);
@@ -64,9 +64,9 @@ class CiscoRouterController extends Controller
         $validator = Validator::make($request->all(), [
   
              'sap_id'    => 'required', 
-             'hostname'  => 'required|unique',
+             'hostname'  => 'required|unique:posts',
              'type'      => 'required',
-             'loopback'  => 'required|unique',
+             'loopback'  => 'required|unique:posts',
              'mac_address' => 'required',
   
         ]);
@@ -78,7 +78,7 @@ class CiscoRouterController extends Controller
         }
   
         $data    = $request->all();
-        $router  = Router::where('id',$ip_address)->update($data);
+        $router  = Router::where('loopback',$request->loopback)->update($data);
  
         // $success['token']    =  $router->createToken('MyApp')->accessToken;
         // $success['hostname'] =  $router->hostname;
@@ -97,7 +97,7 @@ class CiscoRouterController extends Controller
 
     public function delete( Router $router )
     {
-        return 'komal';
+        $router  = Router::where('loopback',$request->loopback)->delete();
     }
  
    /**
