@@ -19,6 +19,26 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('RouterCreatePage', require('./components/RouterCreatePage.vue'));
 
+/* 
+
+// Global event bus
+window.EventBus = new Vue();
+
+window.flash = function (message, level = 'success') {
+    window.EventBus.$emit('flash', { message, level });
+};
+
+window.firePost = function (callBack) {
+
+    if (window.ajx.url != undefined) {
+        axios.post(window.ajx.url, window.ajx).then(callBack).catch(function (error) {
+            console.log(error);
+        });
+    }
+};
+
+
+ */
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')

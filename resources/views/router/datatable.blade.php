@@ -55,13 +55,3 @@
     </script>
     {!! $builder->scripts() !!}
 @endpush
-
-@section('head_css')
-<style type="text/css">
-    .message-clr span {
-        margin: 5px;
-
-    }
-</style>
-
-@endsection

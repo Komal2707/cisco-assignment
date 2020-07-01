@@ -6,5 +6,5 @@
                 :router="{{json_encode($router)}}" 
                 :meta="{{json_encode($meta)}}"
                         >
-    </router-create-page>   
+    </router-create-page>
 @endsection

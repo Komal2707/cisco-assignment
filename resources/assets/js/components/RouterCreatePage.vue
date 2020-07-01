@@ -46,10 +46,7 @@
 
 <script>
 
-    // import BankAccountBasicDetails from './BankAccountBasicDetails';
-
     export default {
-        // components: {BankAccountBasicDetails},
         props:['router','meta'],
 
         data(){

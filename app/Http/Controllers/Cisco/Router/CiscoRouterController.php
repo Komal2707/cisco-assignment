@@ -17,7 +17,7 @@ class CiscoRouterController extends Controller
     public function dataTable( CiscoRouterListDatatable $dataTable , Request $request ,$search =null)
     {
 
-        if ( $request->ajax() || $request->wantsJson())
+        if ( $request->ajax() || $request->wantsJson() )
             return $dataTable->ajax();
 
         $builder = $dataTable->with('id',$search)->html();
