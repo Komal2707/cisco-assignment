@@ -19,7 +19,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('RouterCreatePage', require('./components/RouterCreatePage.vue'));
 
-/* 
+
 
 // Global event bus
 window.EventBus = new Vue();
@@ -38,7 +38,7 @@ window.firePost = function (callBack) {
 };
 
 
- */
+
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')

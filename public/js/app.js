@@ -47572,9 +47572,8 @@ module.exports = function(module) {
 /***/ }),
 
 /***/ "./resources/assets/js/app.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -47596,13 +47595,13 @@ window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 Vue.component('example-component', __webpack_require__("./resources/assets/js/components/ExampleComponent.vue"));
 Vue.component('RouterCreatePage', __webpack_require__("./resources/assets/js/components/RouterCreatePage.vue"));
 
-/* 
-
 // Global event bus
 window.EventBus = new Vue();
 
-window.flash = function (message, level = 'success') {
-    window.EventBus.$emit('flash', { message, level });
+window.flash = function (message) {
+    var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+
+    window.EventBus.$emit('flash', { message: message, level: level });
 };
 
 window.firePost = function (callBack) {
@@ -47614,8 +47613,6 @@ window.firePost = function (callBack) {
     }
 };
 
-
- */
 Vue.component('passport-clients', __webpack_require__("./resources/assets/js/components/passport/Clients.vue"));
 
 Vue.component('passport-authorized-clients', __webpack_require__("./resources/assets/js/components/passport/AuthorizedClients.vue"));
