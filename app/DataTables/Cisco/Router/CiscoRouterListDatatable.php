@@ -31,7 +31,7 @@ class CiscoRouterListDatatable extends DataTable {
                 $btn .= "<a data-url=\"" . route('cisco::router::delete', ['router' => $router->id]) . "\"  data-toggle=\"modal\" data-target=\"#modal-confirm-danger\" data-id=\"$router->id\" class=\"btn modal-confirm-danger-btn btn-sm btn-danger ccbtn\"><span data-toggle ='tooltip' data-placement='top' data-original-title='Delete Router'><i class='fa fa-trash'></i></span></a>";
 
                 return $btn;
-            })->make(true);
+            })->rawColumns(['action']);
     }
 
     /**
@@ -53,7 +53,11 @@ class CiscoRouterListDatatable extends DataTable {
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->minifiedAjax(route('cisco::router::list'))
+            // ->minifiedAjax(route('cisco::router::list'))
+             ->ajax([
+                    'url'  => route('cisco::router::list') ,
+                    'data' => 'function(d){}'
+            ])
             ->addAction(['width' => '80px'])
             ->parameters($this->getBuilderParameters());
     }

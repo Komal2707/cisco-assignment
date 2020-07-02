@@ -38,9 +38,9 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      {{-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li> --}}
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route('cisco::router::list') }}" class="nav-link">Home - Cisco Router</a>
+      </li>
       {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li> --}}
@@ -244,7 +244,27 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    @yield('content')
+    <div class="content-wrapper" style="margin-left: 0px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header" >
+            <h1>
+                @if(isset($pageName) && is_array($pageName))
+                    {{ isset($pageName[0]) ? $pageName[0] : ""}}
+                    <small> {{isset($pageName[1])  ? $pageName[1] : ""}}</small>
+                @endif
+            </h1>
+            <ol class="breadcrumb">
+                @stack('buttons')
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            @yield('content')
+
+        </section>
+        <!-- /.content -->
+    </div>
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
