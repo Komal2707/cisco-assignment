@@ -32,6 +32,7 @@ class CiscoRouterController extends Controller
         // $pageName = ["Cisco Routers", "list of all cisco router"];
 
         $data = [
+            'pageName'  => ["Cisco Routers", "create new cisco router"],
             'meta'      => [
                 'router_types' => $this->getRouterType()
             ],
