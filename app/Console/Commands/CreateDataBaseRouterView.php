@@ -46,7 +46,10 @@ class CreateDataBaseRouterView extends Command
                                     hostname,
                                     type,
                                     loopback,
-                                    mac_address
+                                    mac_address,
+                                    created_at,
+                                    updated_at,
+                                    deleted_at
                                 FROM
                                     routers
                             

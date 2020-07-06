@@ -18,13 +18,21 @@ class CiscoRouterRepository implements ICiscoRouterRepository {
     public function getBuilder()
     {
 
-        return $this->dbView;
+        return $this->table;
 
     }
 
     public function getList()
     {
-        return $this->dbView->orderBy('id', 'desc');
+        return $this->table->select(
+            'id',
+            'sap_id',
+            'type',
+            'hostname',
+            'loopback',
+            'mac_address',
+            'created_at'
+        )->orderBy('id', 'desc');
     }
 
 

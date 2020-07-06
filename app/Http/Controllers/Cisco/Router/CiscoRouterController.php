@@ -19,9 +19,10 @@ class CiscoRouterController extends Controller
 
         if ( $request->ajax() || $request->wantsJson() )
             return $dataTable->ajax();
-
+// dd($dataTable->html()->table());
         $builder = $dataTable->with('id',$search)->html();
-
+// dd($dataTable->query());
+// dd($dataTable->html()->table());
         $pageName = ["Ciscp Router" , "list of all the cisco router"];
 
         return view('router.datatable' , compact('pageName' , 'builder'));

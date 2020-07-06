@@ -19,28 +19,28 @@ class CiscoRouterListDatatable extends DataTable {
     public function dataTable( $query )
     {
 
-        return datatables($query)
+        return datatables($query);
             // ->editColumn('created_at' , function ( $router ) {
 
             //     return $router->created_at->toFormattedDateString();
             // })
-            ->addColumn('action' , function ( $router ) {
-                $btn = "";
+            // ->addColumn('action' , function ( $router ) {
+            //     $btn = "";
 
-                $btn .= '<a href="' . route('cisco::router::edit', ['router' => $router->id]) . '" data-toggle="tooltip" data-placement="top" data-original-title="Edit Router" class="btn btn-info btn-sm text-center ccbtn"><i class="fa fa-pencil"></i></a>';
-                $btn .= "<a data-url=\"" . route('cisco::router::delete', ['router' => $router->id]) . "\"  data-toggle=\"modal\" data-target=\"#modal-confirm-danger\" data-id=\"$router->id\" class=\"btn modal-confirm-danger-btn btn-sm btn-danger ccbtn\"><span data-toggle ='tooltip' data-placement='top' data-original-title='Delete Router'><i class='fa fa-trash'></i></span></a>";
+            //     // $btn .= '<a href="' . route('cisco::router::edit', ['router' => $router->id]) . '" data-toggle="tooltip" data-placement="top" data-original-title="Edit Router" class="btn btn-info btn-sm text-center ccbtn"><i class="fa fa-pencil"></i></a>';
+            //     // $btn .= "<a data-url=\"" . route('cisco::router::delete', ['router' => $router->id]) . "\"  data-toggle=\"modal\" data-target=\"#modal-confirm-danger\" data-id=\"$router->id\" class=\"btn modal-confirm-danger-btn btn-sm btn-danger ccbtn\"><span data-toggle ='tooltip' data-placement='top' data-original-title='Delete Router'><i class='fa fa-trash'></i></span></a>";
 
-                return $btn;
-            })->rawColumns(['action']);
+            //     return $btn;
+            // })->rawColumns(['action']);
     }
 
     /**
      * @param CiscoRouterRepository $router
      * @return mixed
      */
-    public function query( CiscoRouterRepository $router )
+    public function query( )
     {
-        return $router->getList();
+        return $router = ( new CiscoRouterRepository())->getList();
 
     }
 
@@ -53,11 +53,12 @@ class CiscoRouterListDatatable extends DataTable {
     {
         return $this->builder()
             ->columns($this->getColumns())
-            // ->minifiedAjax(route('cisco::router::list'))
-             ->ajax([
-                    'url'  => route('cisco::router::list') ,
-                    'data' => 'function(d){}'
-            ])
+            ->minifiedAjax(route('cisco::router::list'))
+            //  ->ajax([
+            //         'url'  => route('cisco::router::list') ,
+            //         'data' => 'function(d){}',
+            //         'success'   => 'console.log(d)'
+            // ])
             ->addAction(['width' => '80px'])
             ->parameters($this->getBuilderParameters());
     }
