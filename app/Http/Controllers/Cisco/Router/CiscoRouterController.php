@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cisco\Router;
 use App\Router;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\DataTables\Cisco\Router\CiscoRouterListDatatable;
 
 /**
@@ -19,6 +20,7 @@ class CiscoRouterController extends Controller
 
         if ( $request->ajax() || $request->wantsJson() )
             return $dataTable->ajax();
+// dd($dataTable->ajax());
 // dd($dataTable->html()->table());
         $builder = $dataTable->with('id',$search)->html();
 // dd($dataTable->query());
@@ -88,8 +90,7 @@ class CiscoRouterController extends Controller
     {
         $router = request('router');
 
-
-       $validator = Validator::make($request->all(), [
+        $validator = Validator::make($router, [
  
             'sap_id'    => 'required', 
             'hostname'  => 'required|unique:routers',

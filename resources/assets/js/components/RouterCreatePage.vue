@@ -102,7 +102,7 @@
 
             submitRouterDetails: function() {
                 if(this.submitFormValidation()) {
-                    axios.post('/admin/cisco/router/store/', { router : this.router_details }).then( function (response) {
+                    axios.post('/cisco/router/store/', { router : this.router_details }).then( function (response) {
                         if( response.data.id ) {
                             if( this.router_details.id )
                                 notyf.confirm('Router Record Updated Succesfully');

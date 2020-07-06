@@ -10,6 +10,30 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+require('notyf');
+
+// Create an instance of Notyf
+// var notyf = new Notyf();
+
+import Echo from 'laravel-echo';
+import vSelect from 'vue-select';
+// import { Notyf } from 'notyf';
+// import 'notyf/notyf.min.css'; // for React and Vue
+
+window.notyf = new Notyf();
+
+// Create an instance of Notyf
+// var notyf = new Notyf();
+
+// var notyf = new Notyf();
+
+/* window.notifyAndRedirect = function( message, url) {
+    notyf.confirm( message);
+    setTimeout( function() {
+        window.location = url;
+    }, 1500);
+} */
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,6 +43,8 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('RouterCreatePage', require('./components/RouterCreatePage.vue'));
 
+
+Vue.component('v-select', vSelect);
 
 
 // Global event bus

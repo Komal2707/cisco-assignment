@@ -27,7 +27,7 @@ Route::group(['as' => 'cisco::', 'prefix' => 'cisco', 'namespace' => 'Cisco'], f
         Route::get('edit/{router}', [ 'as' => 'edit', 'uses' => 'CiscoRouterController@edit']);
         Route::get('delete/{router}', [ 'as' => 'delete', 'uses' => 'CiscoRouterController@delete']);
         
-        Route::post('store', ['middleware' => ['permission:' . ''], 'as' => 'store', 'uses' => 'CiscoRouterController@store']);
+        Route::post('store', ['as' => 'store', 'uses' => 'CiscoRouterController@store']);
     });
     
     Route::group(['as' => 'geometric::', 'prefix' => 'geometric', 'namespace' => 'Geometric'], function () {
