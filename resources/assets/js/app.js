@@ -8,6 +8,11 @@
 require('./bootstrap');
 // require('./common');
 
+require('datatables.net');
+require('datatables.net-bs');
+require('bootstrap-datepicker');
+require('select2');
+
 window.Vue = require('vue');
 
 require('notyf');

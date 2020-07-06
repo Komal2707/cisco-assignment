@@ -18,13 +18,10 @@ class CiscoRouterController extends Controller
     public function dataTable( CiscoRouterListDatatable $dataTable , Request $request ,$search =null)
     {
 
-        if ( $request->ajax() || $request->wantsJson() )
+        if ( $request->ajax() || $request->wantsJson() || 1==1 )
             return $dataTable->ajax();
-// dd($dataTable->ajax());
-// dd($dataTable->html()->table());
+
         $builder = $dataTable->with('id',$search)->html();
-// dd($dataTable->query());
-// dd($dataTable->html()->table());
         $pageName = ["Ciscp Router" , "list of all the cisco router"];
 
         return view('router.datatable' , compact('pageName' , 'builder'));
@@ -145,6 +142,6 @@ class CiscoRouterController extends Controller
 
     public function delete( Router $router )
     {
-        return $router->delete();
+        return response()->json([ 'result' => $router->delete() ]);
     }
 }

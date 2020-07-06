@@ -5,8 +5,8 @@ namespace App\DataTables\Cisco\Router;
 use App\Router;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\QueryDataTable;
 use Yajra\DataTables\Services\DataTable;
+use App\Repository\ICiscoRouterRepository;
 use App\Repository\CiscoRouterRepository;
 
 class CiscoRouterListDatatable extends DataTable {
@@ -19,29 +19,29 @@ class CiscoRouterListDatatable extends DataTable {
     public function dataTable( $query )
     {
 
-        return datatables($query);
-            // ->editColumn('created_at' , function ( $router ) {
+        return datatables($query)
+            ->editColumn('created_at' , function ( $router ) {
 
-            //     return $router->created_at->toFormattedDateString();
-            // })
-            // ->addColumn('action' , function ( $router ) {
-            //     $btn = "";
+                return $router->created_at->toFormattedDateString();
+            })
+            ->addColumn('action' , function ( $router ) {
+                $btn = "";
 
-            //     // $btn .= '<a href="' . route('cisco::router::edit', ['router' => $router->id]) . '" data-toggle="tooltip" data-placement="top" data-original-title="Edit Router" class="btn btn-info btn-sm text-center ccbtn"><i class="fa fa-pencil"></i></a>';
-            //     // $btn .= "<a data-url=\"" . route('cisco::router::delete', ['router' => $router->id]) . "\"  data-toggle=\"modal\" data-target=\"#modal-confirm-danger\" data-id=\"$router->id\" class=\"btn modal-confirm-danger-btn btn-sm btn-danger ccbtn\"><span data-toggle ='tooltip' data-placement='top' data-original-title='Delete Router'><i class='fa fa-trash'></i></span></a>";
+                $btn .= '<a href="' . route('cisco::router::edit', ['router' => $router->id]) . '" data-toggle="tooltip" data-placement="top" data-original-title="Edit Router" class="btn btn-info btn-sm text-center ccbtn"><i class="fa fa-pencil"></i></a>';
+                $btn .= "<a data-url=\"" . route('cisco::router::delete', ['router' => $router->id]) . "\"  data-toggle=\"modal\" data-target=\"#modal-confirm-danger\" data-id=\"$router->id\" class=\"btn modal-confirm-danger-btn btn-sm btn-danger ccbtn\"><span data-toggle ='tooltip' data-placement='top' data-original-title='Delete Router'><i class='fa fa-trash'></i></span></a>";
 
-            //     return $btn;
-            // })->rawColumns(['action']);
+                return $btn;
+            })->rawColumns(['action']);
     }
 
     /**
-     * @param CiscoRouterRepository $router
+     * @param ICiscoRouterRepository $router
      * @return mixed
      */
-    public function query( )
+    public function query( /* ICiscoRouterRepository $router */ )
     {
-        return $router = ( new CiscoRouterRepository())->getList();
-
+        // return $router->getList();
+        return (new CiscoRouterRepository())->getList();
     }
 
     /**
@@ -49,16 +49,14 @@ class CiscoRouterListDatatable extends DataTable {
      *
      * @return \Yajra\DataTables\Html\Builder
      */
+
     public function html()
     {
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax(route('cisco::router::list'))
-            //  ->ajax([
-            //         'url'  => route('cisco::router::list') ,
-            //         'data' => 'function(d){}',
-            //         'success'   => 'console.log(d)'
-            // ])
+            // ->ajax(url('cisco/router/list'))
+            ->ajax(["url" => route('cisco::router::list'),"data"=> "function(d){}"])
             ->addAction(['width' => '80px'])
             ->parameters($this->getBuilderParameters());
     }

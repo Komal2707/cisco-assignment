@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Router;
 use App\RouterView;
 use Illuminate\Http\Request;
+use App\Repository\ICiscoRouterRepository;
 
 class CiscoRouterRepository implements ICiscoRouterRepository {
 
