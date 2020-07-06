@@ -1666,6 +1666,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 //
 //
 //
@@ -1775,6 +1777,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         setTimeout(function () {
                             window.location.href = "/cisco/router/list";
                         }, 1000);
+                    } else if (response.data) {
+                        console.log(response.data);
+                    }
+                }).catch(function (error) {
+                    console.log(error.response.data);
+                    if (_typeof(error.response.data) === 'object') {
+
+                        _.each(error.response.data, function (e) {
+
+                            if ((typeof e === 'undefined' ? 'undefined' : _typeof(e)) === 'object') {
+
+                                if (e.hostname) {
+                                    _.each(e.hostname, function (hname) {
+                                        notyf.alert(hname);
+                                    });
+                                }
+                                if (e.loopback) {
+                                    _.each(e.loopback, function (lb) {
+                                        notyf.alert(lb);
+                                    });
+                                }
+                            } else {
+                                notyf.alert(e);
+                            }
+                        }.bind(this));
+                    } else {
+                        notyf.alert('Something went wrong. Please try again.');
                     }
                 }.bind(this));
             }

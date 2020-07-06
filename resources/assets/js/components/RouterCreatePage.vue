@@ -114,6 +114,39 @@
                             else
                                 notyf.confirm('Router Record Created Succesfully');
                             setTimeout(function(){ window.location.href = "/cisco/router/list"; }, 1000);
+
+                        } else if( response.data ) {
+                            console.log(response.data);
+                        }
+
+                    }).catch(function (error) {
+                        console.log(error.response.data);
+                        if (typeof error.response.data === 'object') {
+
+                            _.each( error.response.data, function( e ) {
+                                
+                                if (typeof e === 'object') {
+
+                                    if( e.hostname )
+                                    {
+                                        _.each( e.hostname, function( hname ) {
+                                            notyf.alert(hname);
+                                        });
+                                    }
+                                    if( e.loopback )
+                                    {
+                                        _.each( e.loopback, function( lb ) {
+                                            notyf.alert(lb);
+                                        });
+                                    }
+                                } else {
+                                    notyf.alert(e);
+                                }
+
+                            }.bind(this));
+
+                        } else {
+                            notyf.alert('Something went wrong. Please try again.');
                         }
                     }.bind(this));
                 }
