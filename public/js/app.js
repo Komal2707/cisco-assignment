@@ -49252,6 +49252,45 @@ window.notyf = new Notyf();
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+$(function () {
+    // $('.sidebar-menu').tree();
+    // $('.select2').select2();
+    // $('.icheckCustom').iCheck({
+    //     checkboxClass: 'icheckbox_square-blue',
+    //     radioClass: 'iradio_square-blue',
+    //     increaseArea: '20%' // optional
+    // });
+
+
+    $("body").on("collapsed.pushMenu", function () {
+        if ($.AdminLTESidebarTweak.options.EnableRemember) {
+            document.cookie = "toggleState=closed";
+        }
+    });
+
+    $("body").on("expanded.pushMenu", function () {
+        if ($.AdminLTESidebarTweak.options.EnableRemember) {
+            document.cookie = "toggleState=opened";
+        }
+    });
+
+    // if($.AdminLTESidebarTweak.options.EnableRemember){
+    // var re = new RegExp('toggleState' +"=([^;]+)");
+    // var value = re.exec(document.cookie);
+    // var toggleState = (value != null) ? unescape(value[1]) : null;
+    // if(toggleState == 'closed'){
+    //     if($.AdminLTESidebarTweak.options.NoTransitionAfterReload){
+    // $("body").addClass('sidebar-collapse hold-transition').delay(100).queue(function(){
+    //     $(this).removeClass('hold-transition');
+    // });
+    //     }else{
+    $("body").addClass('sidebar-collapse');
+    //     }
+    // }
+    // }
+
+});
+
 Vue.component('example-component', __webpack_require__("./resources/assets/js/components/ExampleComponent.vue"));
 Vue.component('RouterCreatePage', __webpack_require__("./resources/assets/js/components/RouterCreatePage.vue"));
 
