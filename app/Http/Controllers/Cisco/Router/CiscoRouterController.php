@@ -135,10 +135,11 @@ class CiscoRouterController extends Controller
 
             $router = Router::find($router['id']);
             $router->update($data);
-            return $router;
+            return response()->json($router);
 
         } else {
-            return Router::create($data);
+            $router = Router::create($data);
+            return response()->json($router);
         }
     }
 

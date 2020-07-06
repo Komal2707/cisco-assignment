@@ -1777,11 +1777,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         setTimeout(function () {
                             window.location.href = "/cisco/router/list";
                         }, 1000);
-                    } else if (response.data) {
-                        console.log(response.data);
                     }
-                }).catch(function (error) {
-                    console.log(error.response.data);
+                }.bind(this)).catch(function (error) {
+                    if (!error.response) return false;
+
                     if (_typeof(error.response.data) === 'object') {
 
                         _.each(error.response.data, function (e) {

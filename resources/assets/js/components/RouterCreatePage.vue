@@ -107,20 +107,22 @@
 
             submitRouterDetails: function() {
                 if(this.submitFormValidation()) {
-                    axios.post('/cisco/router/store/', { router : this.router_details }).then( function (response) {
-                        if( response.data.id ) {
-                            if( this.router_details.id )
-                                notyf.confirm('Router Record Updated Succesfully');
-                            else
-                                notyf.confirm('Router Record Created Succesfully');
-                            setTimeout(function(){ window.location.href = "/cisco/router/list"; }, 1000);
+                    axios.post('/cisco/router/store/', { router : this.router_details })
+                        .then( function (response) {
+                            if( response.data.id ) {
+                                if( this.router_details.id )
+                                    notyf.confirm('Router Record Updated Succesfully');
+                                else
+                                    notyf.confirm('Router Record Created Succesfully');
+                                setTimeout(function(){ window.location.href = "/cisco/router/list"; }, 1000);
 
-                        } else if( response.data ) {
-                            console.log(response.data);
-                        }
+                            }
 
-                    }).catch(function (error) {
-                        console.log(error.response.data);
+                    }.bind(this))
+                    .catch(function (error) {
+                        if( !error.response )
+                            return false;
+
                         if (typeof error.response.data === 'object') {
 
                             _.each( error.response.data, function( e ) {
