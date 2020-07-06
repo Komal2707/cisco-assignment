@@ -19,6 +19,7 @@
                         <label for="name">Type :</label>
                         <v-select
                             label="name"
+                            v-model="router_type"
                             :options="meta.router_types"
                             :on-change="routerTypeChange"
                         ></v-select>
@@ -58,7 +59,8 @@
                     'type' : null,
                     'loopback' : null,
                     'mac_address' : null,
-                }
+                },
+                router_type: null
             };
         },
 
@@ -71,6 +73,9 @@
                 this.router_details.type = this.router.type;
                 this.router_details.loopback = this.router.loopback;
                 this.router_details.mac_address = this.router.mac_address;
+
+                this.router_type = _.find( this.meta.router_types, {'id' : this.router.type});
+
             }
 
         },
@@ -108,7 +113,7 @@
                                 notyf.confirm('Router Record Updated Succesfully');
                             else
                                 notyf.confirm('Router Record Created Succesfully');
-                            setTimeout(function(){ window.location.href = "/admin/cisco/lists/router/"; }, 1000);
+                            setTimeout(function(){ window.location.href = "/cisco/router/list"; }, 1000);
                         }
                     }.bind(this));
                 }

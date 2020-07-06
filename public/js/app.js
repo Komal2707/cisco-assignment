@@ -1712,6 +1712,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1726,7 +1727,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'type': null,
                 'loopback': null,
                 'mac_address': null
-            }
+            },
+            router_type: null
         };
     },
 
@@ -1740,6 +1742,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.router_details.type = this.router.type;
             this.router_details.loopback = this.router.loopback;
             this.router_details.mac_address = this.router.mac_address;
+
+            this.router_type = _.find(this.meta.router_types, { 'id': this.router.type });
         }
     },
 
@@ -1769,7 +1773,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     if (response.data.id) {
                         if (this.router_details.id) notyf.confirm('Router Record Updated Succesfully');else notyf.confirm('Router Record Created Succesfully');
                         setTimeout(function () {
-                            window.location.href = "/admin/cisco/lists/router/";
+                            window.location.href = "/cisco/router/list";
                         }, 1000);
                     }
                 }.bind(this));
@@ -36287,6 +36291,13 @@ var render = function() {
                   label: "name",
                   options: _vm.meta.router_types,
                   "on-change": _vm.routerTypeChange
+                },
+                model: {
+                  value: _vm.router_type,
+                  callback: function($$v) {
+                    _vm.router_type = $$v
+                  },
+                  expression: "router_type"
                 }
               })
             ],
