@@ -106,10 +106,44 @@ class CiscoRouterController extends Controller
     * @return \Illuminate\Http\Response
     */
  
-   public function getDetails()
-   {# code...
-       $user = Auth::user();
-       return response()->json(['success' => $user], $this->successStatus);
+   public function getRoutersByIPRange( Request $request )
+   {
+       $validator = Validator::make($request->all(), [
+    
+            'from'  => 'required',
+            'to'    => 'required',
+
+        ]);
+
+        if ($validator->fails())
+            return response()->json(['error'=>$validator->errors()], 401);
+
+        $from = $request->from;
+        $to   = $request->to;
+
+        $router = Router::whereBetween('loopback', [$from, $to])->get();
+
+       return response()->json(['router' => $router], $this->successStatus);
+   }
+
+   public function getRoutersByTypeAndSapId( Request $request )
+   {
+       $validator = Validator::make($request->all(), [
+    
+            'sap_id'  => 'required',
+            'type'    => 'required',
+
+        ]);
+
+        if ($validator->fails())
+            return response()->json(['error'=>$validator->errors()], 401);
+
+        $type   = $request->type;
+        $sap_id = $request->sap_id;
+
+        $router = Router::whereType($type)->whereSapId($sap_id)->get();
+
+       return response()->json(['router' => $router], $this->successStatus);
    }
  
 }

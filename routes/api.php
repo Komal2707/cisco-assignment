@@ -29,5 +29,7 @@ Route::group(['middleware' => 'auth:api', 'as' => 'router::', 'prefix' => 'route
     Route::post('create', 'Api\CiscoRouterController@create');
     Route::post('update/{ip}', 'Api\CiscoRouterController@update');
     Route::post('delete/{ip}', 'Api\CiscoRouterController@delete');
+    Route::post('get-details-by-ip-range', 'Api\CiscoRouterController@getRoutersByIPRange');
+    Route::post('get-details-by-type-sapid', 'Api\CiscoRouterController@getRoutersByTypeAndSapId');
 
 });
