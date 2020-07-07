@@ -18,6 +18,12 @@ Route::get('/', function () {
 
 Route::group(['as' => 'cisco::', 'prefix' => 'cisco', 'namespace' => 'Cisco'], function () {
 
+    Route::group(['as' => 'scripts::', 'prefix' => 'scripts', 'namespace' => 'Scripts'], function () {
+
+        Route::get('/', [ 'as' => 'show', 'uses' => 'CiscoScriptsController@scripts']);
+
+    });
+
     Route::group(['as' => 'router::', 'prefix' => 'router', 'namespace' => 'Router'], function () {
 
         Route::get('list', [ 'as' => 'list', 'uses' => 'CiscoRouterController@dataTable']);
