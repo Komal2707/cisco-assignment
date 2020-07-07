@@ -59,7 +59,6 @@ class CiscoRouterController extends Controller
  
         $validator = Validator::make($request->all(), [
     
-            'router_id' => 'required',
             'sap_id'    => 'required',
             'hostname'  => 'required|unique:routers,hostname,'.$router->id,
             'type'      => 'required',
