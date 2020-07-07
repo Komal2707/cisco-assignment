@@ -43,10 +43,6 @@ class CiscoRouterController extends Controller
        $data    = $request->all();
        $router  = Router::create($data);
 
-    //    $success['token']    =  $router->createToken('MyApp')->accessToken;
-    //    $success['hostname'] =  $router->hostname;
-    //    $success['loopback'] =  $router->loopback;
- 
        return response()->json(['success'=>$router], $this->successStatus);
  
    }
@@ -57,17 +53,19 @@ class CiscoRouterController extends Controller
     * @return \Illuminate\Http\Response
     */
  
-    public function update(Request $request)
+    public function update( $ip, Request $request)
     {
+        $router = Router::where('loopback',$ip)->first();
  
         $validator = Validator::make($request->all(), [
-  
-             'sap_id'    => 'required', 
-             'hostname'  => 'required|unique:routers',
-             'type'      => 'required',
-             'loopback'  => 'required|unique:routers',
-             'mac_address' => 'required',
-  
+    
+            'router_id' => 'required',
+            'sap_id'    => 'required',
+            'hostname'  => 'required|unique:routers,hostname,'.$router->id,
+            'type'      => 'required',
+            'loopback'  => 'unique:routers,loopback,'.$router->id,
+            'mac_address' => 'required',
+
         ]);
    
         if ($validator->fails()) {
@@ -76,13 +74,15 @@ class CiscoRouterController extends Controller
   
         }
   
-        $data    = $request->all();
-        $router  = Router::where('loopback',$request->loopback)->update($data);
+        $data    = [
+            'sap_id'        =>  $request->sap_id,
+            'hostname'      =>  $request->hostname,
+            'type'          =>  $request->type,
+            'mac_address'   =>  $request->mac_address,
+        ];
+
+        $router  = Router::where('loopback',$ip)->update($data);
  
-        // $success['token']    =  $router->createToken('MyApp')->accessToken;
-        // $success['hostname'] =  $router->hostname;
-        // $success['loopback'] =  $router->loopback;
-  
         return response()->json(['success'=>$router], $this->successStatus);
   
     }
@@ -94,9 +94,10 @@ class CiscoRouterController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function delete( Router $router )
+    public function delete( $ip )
     {
-        $router  = Router::where('loopback',$request->loopback)->delete();
+        $router  = Router::where('loopback',$ip)->delete();
+        return response()->json(['success'=>$router], $this->successStatus);
     }
  
    /**
