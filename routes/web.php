@@ -21,6 +21,7 @@ Route::group(['as' => 'cisco::', 'prefix' => 'cisco', 'namespace' => 'Cisco'], f
     Route::group(['as' => 'scripts::', 'prefix' => 'scripts', 'namespace' => 'Scripts'], function () {
 
         Route::get('/', [ 'as' => 'show', 'uses' => 'CiscoScriptsController@scripts']);
+        Route::get('zip-and-extract/{numberoffiles}', [ 'as' => 'zip-and-extract', 'uses' => 'CiscoScriptsController@zipAndExtract']);
 
     });
 
